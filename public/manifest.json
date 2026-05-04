@@ -1,0 +1,21 @@
+{
+  "name": "Vattam — ningalkku chuttum",
+  "short_name": "Vattam",
+  "description": "Hyperlocal service booking platform for Kerala.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#5DD62C",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

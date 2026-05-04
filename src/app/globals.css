@@ -1,0 +1,204 @@
+@import "tailwindcss";
+
+/* ================================================
+   CIRQL DESIGN SYSTEM — Single Source of Truth
+   "Premium Light" Theme — No Dark Mode
+   ================================================ */
+
+@theme {
+  --font-sans: "Inter", "SF Pro Display", system-ui, sans-serif;
+
+  /* ── Core Surfaces ── */
+  --color-background: #FFFFFF;        /* Pure white like logo center */
+  --color-foreground: #040B16;        /* Very dark navy from logo left */
+
+  /* ── Card / Panel ── */
+  --color-card: #F8FAFC;              /* Slight off-white for contrast */
+  --color-card-foreground: #040B16;
+
+  /* ── Brand Colors ── */
+  --color-primary: #00C4CC;           /* Bright Cyan from logo right */
+  --color-primary-foreground: #FFFFFF;
+
+  --color-secondary: #02508B;         /* Deep Blue from logo right */
+  --color-secondary-foreground: #FFFFFF;
+
+  /* ── Neutrals ── */
+  --color-muted: #F1F5F9;
+  --color-muted-foreground: #475569;
+
+  /* ── Structure ── */
+  --color-border: #E2E8F0;
+  --color-input: #FFFFFF;
+  --color-ring: #00C4CC;
+
+  /* ── Border Radius Scale ── */
+  --radius-xl:  0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+  --radius-4xl: 2rem;
+  --radius-5xl: 2.5rem;
+  --radius-6xl: 3rem;
+}
+
+/* ── Global Base ── */
+@layer base {
+  :root {
+    --glow-primary: rgba(0, 196, 204, 0.12);
+    --glow-secondary: rgba(2, 80, 139, 0.10);
+  }
+
+  * {
+    @apply border-border;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/20;
+    background-image:
+      radial-gradient(ellipse at 0% 0%,   var(--glow-primary) 0px, transparent 50%),
+      radial-gradient(ellipse at 100% 0%, var(--glow-secondary) 0px, transparent 50%);
+    background-attachment: fixed;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* ── Component Library ── */
+@layer components {
+
+  /* Glass/Card Panel */
+  .glass-card {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
+    transition: all 0.4s ease;
+  }
+
+  /* Hover Lift */
+  .glass-card-hover {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
+    transition: all 0.4s ease;
+  }
+  .glass-card-hover:hover {
+    border-color: rgba(0,196,204,0.3);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 20px 48px rgba(0,196,204,0.08);
+    transform: translateY(-3px);
+  }
+
+  /* Primary White Pill */
+  .premium-pill {
+    @apply inline-flex items-center justify-center gap-2
+           rounded-full px-8 py-3 bg-primary text-primary-foreground font-black
+           hover:scale-105 active:scale-95 transition-all
+           shadow-lg cursor-pointer;
+  }
+
+  /* Ghost Button */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2
+           rounded-full px-8 py-4 bg-primary text-primary-foreground font-black
+           hover:scale-105 active:scale-95 transition-all shadow-lg cursor-pointer;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2
+           rounded-full px-6 py-2 text-muted-foreground font-black text-sm
+           uppercase tracking-widest hover:text-foreground transition-all;
+  }
+
+  /* Headline Typography */
+  .glow-text {
+    @apply text-transparent bg-clip-text
+           bg-gradient-to-br from-foreground via-foreground to-foreground/60;
+  }
+
+  /* Badge */
+  .glass-badge {
+    @apply inline-flex items-center gap-1.5 px-4 py-1.5
+           rounded-full text-[10px] font-black uppercase tracking-[0.18em]
+           text-muted-foreground;
+    background: #F1F5F9;
+    border: 1px solid #E2E8F0;
+  }
+
+  /* Status Badges */
+  .badge-active {
+    @apply px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest
+           bg-primary/10 text-primary border border-primary/20;
+  }
+  .badge-done {
+    @apply px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest
+           bg-green-500/10 text-green-600 border border-green-500/20;
+  }
+  .badge-pending {
+    @apply px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest
+           bg-muted text-muted-foreground border border-border;
+  }
+
+  /* Input */
+  .glass-input {
+    @apply w-full rounded-3xl px-6 py-4 text-foreground font-medium
+           focus:outline-none transition-all duration-300;
+    background: #F8FAFC;
+    border: 1.5px solid #E2E8F0;
+  }
+  .glass-input::placeholder { color: #94A3B8; }
+  .glass-input:focus {
+    background: #FFFFFF;
+    border-color: #00C4CC;
+    box-shadow: 0 0 0 3px rgba(0,196,204,0.12);
+  }
+
+  /* Tab Bar */
+  .tab-bar {
+    @apply flex gap-1.5 p-1.5 rounded-full w-fit;
+    background: #F1F5F9;
+    border: 1px solid #E2E8F0;
+  }
+  .tab-item {
+    @apply px-7 py-2.5 rounded-full text-xs font-black uppercase tracking-widest
+           transition-all active:scale-95;
+  }
+  .tab-item-active   { @apply bg-white text-foreground shadow-md; }
+  .tab-item-inactive { @apply text-muted-foreground hover:text-foreground; }
+
+  /* Background Glow Blobs */
+  .bg-glow-primary {
+    @apply absolute rounded-full pointer-events-none;
+    background: rgba(0,196,204,0.08);
+    filter: blur(100px);
+  }
+  .bg-glow-secondary {
+    @apply absolute rounded-full pointer-events-none;
+    background: rgba(2,80,139,0.06);
+    filter: blur(110px);
+  }
+}
+
+/* ── Animations ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50%       { transform: translateY(-14px) rotate(1deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.5; }
+  50%       { opacity: 1; }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-float      { animation: float 8s ease-in-out infinite; }
+.animate-pulse-glow { animation: pulse-glow 8s ease-in-out infinite; }
+.animate-in         { animation: fade-in-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar        { width: 4px; }
+::-webkit-scrollbar-track  { background: transparent; }
+::-webkit-scrollbar-thumb  { background: #CBD5E1; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,196,204,0.5); }
