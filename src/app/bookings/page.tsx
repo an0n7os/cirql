@@ -70,7 +70,7 @@ export default function BookingsPage() {
                     </div>
                     <div>
                       <span className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">{booking.id}</span>
-                      <h3 className="text-2xl font-black text-foreground">{booking.category || booking.service}</h3>
+                      <h3 className="text-2xl font-black text-foreground">{booking.category}</h3>
                       <p className="text-sm text-muted-foreground font-medium">{booking.date} • {booking.time}</p>
                     </div>
                   </div>

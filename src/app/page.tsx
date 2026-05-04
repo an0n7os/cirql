@@ -22,116 +22,41 @@ export default function Home() {
   const { theme, toggleTheme } = useTheme()
   const { user } = useAuth()
   const [weather, setWeather] = useState({ condition: 'Rain', temp: '28°C' })
-  const [pulseIndex, setPulseIndex] = useState(0)
-
-  const pulses = [
-    "🎉 Thrissur Pooram preparations in full swing at Thekkinkadu Maidanam!",
-    "🚧 Traffic alert: Road work near Swaraj Round. Plan your commute.",
-    "🌧️ Heavy rain expected this evening. Book a Roof Checkup now.",
-    "🏥 Free health camp at District Hospital tomorrow morning."
-  ]
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setPulseIndex((prev) => (prev + 1) % pulses.length)
-    }, 4000)
-    return () => clearInterval(interval)
-  }, [])
 
   return (
+
     <main className="min-h-screen bg-background text-foreground overflow-x-hidden selection:bg-primary/20">
-      {/* Floating WhatsApp Magic Button */}
-      <a 
-        href="https://wa.me/919876543210?text=Hi%20Cirql,%20I%20need%20help%20with..."
-        target="_blank"
-        className="fixed bottom-32 right-6 z-50 w-16 h-16 bg-[#25D366] rounded-full flex items-center justify-center shadow-2xl shadow-[#25D366]/40 hover:scale-110 active:scale-95 transition-all group"
-      >
-        <MessageSquare className="w-8 h-8 text-primary-foreground" />
-        <span className="absolute right-20 bg-white text-black text-[10px] font-black px-4 py-2 rounded-xl whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity ios-shadow">Book via WhatsApp</span>
-      </a>
-
-      {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 px-6 py-4 flex justify-between items-center bg-background/80 backdrop-blur-xl transition-all duration-500">
-        <div className="flex items-center gap-3 group cursor-pointer">
-          <div className="w-10 h-10 p-1.5 rounded-xl border border-border/40 bg-card/30 backdrop-blur-md shadow-sm group-hover:scale-110 transition-transform duration-500">
-            <img src="/brand-logo.png" alt="Cirql Logo" className="w-full h-full object-contain" />
-          </div>
-          <span className="text-2xl font-black tracking-tighter text-foreground">cirql</span>
-        </div>
-        <div className="hidden md:flex gap-10 text-[11px] font-black uppercase tracking-[0.2em] text-muted-foreground">
-          <Link href="/#services" className="hover:text-primary transition-colors">Services</Link>
-          <Link href="/bookings" className="hover:text-primary transition-colors">My Bookings</Link>
-          <Link href="/profile" className="hover:text-primary transition-colors">Profile</Link>
-        </div>
-        <div className="flex items-center gap-4">
-          <button 
-            onClick={toggleTheme}
-            className="p-3 rounded-2xl bg-muted/30 hover:bg-muted/50 text-foreground transition-all active:scale-95 flex items-center justify-center group/toggle"
-          >
-            {theme === 'light' ? (
-              <Moon className="w-5 h-5 group-hover/toggle:rotate-[-12deg] transition-transform" />
-            ) : (
-              <Sun className="w-5 h-5 text-primary animate-spin-slow" />
-            )}
-          </button>
-          {user?.isLoggedIn ? (
-            <Link href="/profile" className="w-10 h-10 rounded-xl overflow-hidden border-2 border-primary/20 hover:scale-105 transition-transform active:scale-95">
-              <Image src="/logo.png" alt="User" width={40} height={40} className="object-cover" />
-            </Link>
-          ) : (
-            <Link 
-              href="/login" 
-              className="px-8 py-3.5 bg-primary text-primary-foreground rounded-full text-sm font-black hover:scale-105 active:scale-95 transition-all shadow-xl shadow-primary/30 primary-glow"
-            >
-              Sign In
-            </Link>
-          )}
-        </div>
-      </nav>
-
-      {/* Thrissur Pulse Ticker */}
-      <div className="fixed top-20 w-full z-40 bg-primary/10 border-b border-primary/5 py-3 overflow-hidden whitespace-nowrap backdrop-blur-md">
-        <div className="flex items-center gap-4 px-6">
-          <div className="flex items-center gap-2 px-3 py-1 bg-primary text-primary-foreground rounded-full text-[9px] font-black uppercase tracking-widest">
-            <Zap className="w-3 h-3 fill-current" />
-            Live Pulse
-          </div>
-          <p className="text-xs font-bold text-primary transition-all duration-500">
-            {pulses[pulseIndex]}
-          </p>
-        </div>
-      </div>
-
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center pt-32 px-6 overflow-hidden">
+      <section className="relative min-h-[90vh] flex items-center justify-center px-6 overflow-hidden">
         {/* Weather Widget */}
-        <div className="absolute top-32 right-10 z-10 glass-card p-4 rounded-3xl flex flex-col items-center gap-1 group hover:border-primary/30 transition-colors cursor-default hidden md:flex">
+        <div className="absolute top-10 right-10 z-10 glass-card p-4 rounded-3xl flex flex-col items-center gap-1 group hover:border-primary/30 transition-colors cursor-default hidden md:flex">
           {weather.condition === 'Rain' ? <CloudRain className="w-6 h-6 text-primary animate-bounce" /> : <Sun className="w-6 h-6 text-orange-400" />}
           <span className="text-xs font-black">{weather.temp}</span>
-          <span className="text-[8px] font-bold text-muted-foreground uppercase tracking-widest flex items-center gap-1">
+          <span className="eyebrow flex items-center gap-1">
             Thrissur <span className="w-1 h-1 rounded-full bg-primary animate-pulse" />
           </span>
         </div>
 
         {/* Light Background Glows */}
-        <div className="bg-glow-primary w-[700px] h-[700px] top-[-20%] left-[-10%]" />
-        <div className="bg-glow-secondary w-[700px] h-[700px] bottom-[-20%] right-[-10%]" />
+        <div className="absolute rounded-full pointer-events-none bg-primary/10 blur-[100px] w-[700px] h-[700px] -top-[20%] -left-[10%]" />
+        <div className="absolute rounded-full pointer-events-none bg-secondary/10 blur-[110px] w-[700px] h-[700px] -bottom-[20%] -right-[10%]" />
 
         <div className="relative z-10 max-w-6xl w-full text-center space-y-10 animate-in">
           {/* Ultra Premium Location Badge */}
           <div className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-muted/30 backdrop-blur-md border border-border shadow-[0_0_40px_-10px_rgba(0,196,204,0.2)] animate-float mx-auto">
             <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-foreground/80">Exclusive to Thrissur</span>
+            <span className="eyebrow text-foreground/80 tracking-[0.3em]">Exclusive to Thrissur</span>
           </div>
 
           <div className="space-y-6 py-4">
-            <h1 className="text-7xl md:text-[120px] font-black tracking-[-0.05em] leading-[0.8] text-foreground">
+            <h1 className="h-display text-foreground">
               Elite experts.<br/>
-              <span className="bg-clip-text text-transparent bg-gradient-to-br from-primary via-[#00A0B0] to-secondary pb-4 inline-block">
+              <span className="gradient-text pb-4 inline-block">
                 Effortless living.
               </span>
             </h1>
           </div>
+
 
           <p className="text-lg md:text-2xl text-muted-foreground max-w-3xl mx-auto font-medium leading-relaxed">
             Experience Thrissur's most premium hyper-local network. Uncompromising quality, verified experts, and zero delays. Because your home deserves the absolute best.
