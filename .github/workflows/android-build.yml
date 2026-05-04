@@ -19,7 +19,7 @@ jobs:
                 cache: 'npm'
 
       - name: Install Dependencies
-        run: npm install
+         run: npm install
 
       - name: Build Next.js Static Export
         run: npm run build
